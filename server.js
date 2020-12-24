@@ -1,5 +1,6 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
+var path = require("path");
 
 var app = express();
 
@@ -10,6 +11,9 @@ var PORT = process.env.PORT || 8080;
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//Using public folder
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
@@ -25,15 +29,18 @@ app.set("view engine", "handlebars");
 var games = [
     {
         gameTitle: "Sudoku",
-        href: "/Sudoku"
+        href: "/Sudoku",
+        jsfile: "/games/sudoku.js"
     },
     {
         gameTitle: "Simon",
-        href: "/Simon"
+        href: "/Simon",
+        jsfile: "/games/sudoku.js"
     },
     {
         gameTitle: "Tic Tac Toe",
-        href: "/TicTacToe"
+        href: "/TicTacToe",
+        jsfile: "/games/tictactoe.js"
     }
 ]
   
@@ -46,7 +53,7 @@ var games = [
       console.log(req.params);
       var data = games.find(item => item.gameTitle === req.params.game)
       console.log(data);
-     res.render("games", {game: data.gameTitle})
+     res.render("games", {game: data.gameTitle, jsfile: data.jsfile})
   });
 
   // Start our server so that it can begin listening to client requests.
