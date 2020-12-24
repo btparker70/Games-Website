@@ -22,11 +22,31 @@ app.set("view engine", "handlebars");
   
 //     console.log("connected as id " + connection.threadId);
 //   });
+var games = [
+    {
+        gameTitle: "Sudoku",
+        href: "/Sudoku"
+    },
+    {
+        gameTitle: "Simon",
+        href: "/Simon"
+    },
+    {
+        gameTitle: "Tic Tac Toe",
+        href: "/TicTacToe"
+    }
+]
   
   // Use Handlebars to render the main index.html page with the plans in it.
   app.get("/", function(req, res) {
-    res.send("Page is loading");
+    res.render("index", {games: games})
+  });
 
+  app.get("/:game", function(req, res) {
+      console.log(req.params);
+      var data = games.find(item => item.gameTitle === req.params.game)
+      console.log(data);
+     res.render("games", {game: data.gameTitle})
   });
 
   // Start our server so that it can begin listening to client requests.
