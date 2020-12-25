@@ -31,7 +31,8 @@ var games = [
     {
         gameTitle: "Sudoku",
         href: "/Sudoku",
-        jsfile: "/games/sudoku.js"
+        jsfile: "/games/sudoku.js",
+        HTMLFile: 'public/games/Sudoku/index.html'
     },
     {
         gameTitle: "Simon",
@@ -54,7 +55,8 @@ var games = [
       console.log(req.params);
       var data = games.find(item => item.gameTitle === req.params.game)
       console.log(data);
-     res.render("games", {game: data.gameTitle, jsfile: data.jsfile})
+      var dataFile = fs.readFileSync(data.HTMLFile, 'utf8');
+     res.render("games", {game: data.gameTitle, HTMLFile: dataFile, jsfile: data.jsfile})
   });
 
   // Start our server so that it can begin listening to client requests.

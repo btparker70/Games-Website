@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sudoku!</title>
+    <script src="https://kit.fontawesome.com/59ad34aafc.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/flatly/bootstrap.min.css" />
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" style="background-color: green;">
+            <div class="column">
+                <div style="margin-top: 80px;" class="jumbotron text-center">
+                    <h1 class="display-4">Sudoku! </h1>
+                </div>
+            </div>
+        </div>
+            <div class="container game-board" style="background-color: rgb(255, 255, 255);">
+                <div id="row-1" class="row">
+                    <div id="block_A1" class="col block" tabindex="1"></div>
+                    <div id="block_B1" class="col block" tabindex="1"></div>
+                    <div id="block_C1" class="col block" tabindex="1"></div>
+                    <div id="block_D1" class="col block" tabindex="1"></div>
+                    <div id="block_E1" class="col block" tabindex="1"></div>
+                    <div id="block_F1" class="col block" tabindex="1"></div>
+                    <div id="block_G1" class="col block" tabindex="1"></div>
+                    <div id="block_H1" class="col block" tabindex="1"></div>
+                    <div id="block_I1" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-2" class="row">
+                    <div id="block_A2" class="col block" tabindex="1"></div>
+                    <div id="block_B2" class="col block" tabindex="1"></div>
+                    <div id="block_C2" class="col block" tabindex="1"></div>
+                    <div id="block_D2" class="col block" tabindex="1"></div>
+                    <div id="block_E2" class="col block" tabindex="1"></div>
+                    <div id="block_F2" class="col block" tabindex="1"></div>
+                    <div id="block_G2" class="col block" tabindex="1"></div>
+                    <div id="block_H2" class="col block" tabindex="1"></div>
+                    <div id="block_I2" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-3" class="row">
+                    <div id="block_A3" class="col block" tabindex="1"></div>
+                    <div id="block_B3" class="col block" tabindex="1"></div>
+                    <div id="block_C3" class="col block" tabindex="1"></div>
+                    <div id="block_D3" class="col block" tabindex="1"></div>
+                    <div id="block_E3" class="col block" tabindex="1"></div>
+                    <div id="block_F3" class="col block" tabindex="1"></div>
+                    <div id="block_G3" class="col block" tabindex="1"></div>
+                    <div id="block_H3" class="col block" tabindex="1"></div>
+                    <div id="block_I3" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-4" class="row">
+                    <div id="block_A4" class="col block" tabindex="1"></div>
+                    <div id="block_B4" class="col block" tabindex="1"></div>
+                    <div id="block_C4" class="col block" tabindex="1"></div>
+                    <div id="block_D4" class="col block" tabindex="1"></div>
+                    <div id="block_E4" class="col block" tabindex="1"></div>
+                    <div id="block_F4" class="col block" tabindex="1"></div>
+                    <div id="block_G4" class="col block" tabindex="1"></div>
+                    <div id="block_H4" class="col block" tabindex="1"></div>
+                    <div id="block_I4" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-5" class="row">
+                    <div id="block_A5" class="col block" tabindex="1"></div>
+                    <div id="block_B5" class="col block" tabindex="1"></div>
+                    <div id="block_C5" class="col block" tabindex="1"></div>
+                    <div id="block_D5" class="col block" tabindex="1"></div>
+                    <div id="block_E5" class="col block" tabindex="1"></div>
+                    <div id="block_F5" class="col block" tabindex="1"></div>
+                    <div id="block_G5" class="col block" tabindex="1"></div>
+                    <div id="block_H5" class="col block" tabindex="1"></div>
+                    <div id="block_I5" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-6" class="row">
+                    <div id="block_A6" class="col block" tabindex="1"></div>
+                    <div id="block_B6" class="col block" tabindex="1"></div>
+                    <div id="block_C6" class="col block" tabindex="1"></div>
+                    <div id="block_D6" class="col block" tabindex="1"></div>
+                    <div id="block_E6" class="col block" tabindex="1"></div>
+                    <div id="block_F6" class="col block" tabindex="1"></div>
+                    <div id="block_G6" class="col block" tabindex="1"></div>
+                    <div id="block_H6" class="col block" tabindex="1"></div>
+                    <div id="block_I6" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-7" class="row">
+                    <div id="block_A7" class="col block" tabindex="1"></div>
+                    <div id="block_B7" class="col block" tabindex="1"></div>
+                    <div id="block_C7" class="col block" tabindex="1"></div>
+                    <div id="block_D7" class="col block" tabindex="1"></div>
+                    <div id="block_E7" class="col block" tabindex="1"></div>
+                    <div id="block_F7" class="col block" tabindex="1"></div>
+                    <div id="block_G7" class="col block" tabindex="1"></div>
+                    <div id="block_H7" class="col block" tabindex="1"></div>
+                    <div id="block_I7" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-8" class="row">
+                    <div id="block_A8" class="col block" tabindex="1"></div>
+                    <div id="block_B8" class="col block" tabindex="1"></div>
+                    <div id="block_C8" class="col block" tabindex="1"></div>
+                    <div id="block_D8" class="col block" tabindex="1"></div>
+                    <div id="block_E8" class="col block" tabindex="1"></div>
+                    <div id="block_F8" class="col block" tabindex="1"></div>
+                    <div id="block_G8" class="col block" tabindex="1"></div>
+                    <div id="block_H8" class="col block" tabindex="1"></div>
+                    <div id="block_I8" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-9" class="row">
+                    <div id="block_A9" class="col block" tabindex="1"></div>
+                    <div id="block_B9" class="col block" tabindex="1"></div>
+                    <div id="block_C9" class="col block" tabindex="1"></div>
+                    <div id="block_D9" class="col block" tabindex="1"></div>
+                    <div id="block_E9" class="col block" tabindex="1"></div>
+                    <div id="block_F9" class="col block" tabindex="1"></div>
+                    <div id="block_G9" class="col block" tabindex="1"></div>
+                    <div id="block_H9" class="col block" tabindex="1"></div>
+                    <div id="block_I9" class="col block" tabindex="1"></div>
+                </div>
+            </div>
+            <div id="row-nums" class="row">
+                <button type="button" id="click-1" class="btn btn-success clicker-block">1</button>
+                <button type="button" id="click-2" class="btn btn-success clicker-block">2</button>
+                <button type="button" id="click-3" class="btn btn-success clicker-block">3</button>
+                <button type="button" id="click-4" class="btn btn-success clicker-block">4</button>
+                <button type="button" id="click-5" class="btn btn-success clicker-block">5</button>
+                <button type="button" id="click-6" class="btn btn-success clicker-block">6</button>
+                <button type="button" id="click-7" class="btn btn-success clicker-block">7</button>
+                <button type="button" id="click-8" class="btn btn-success clicker-block">8</button>
+                <button type="button" id="click-9" class="btn btn-success clicker-block">9</button>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <a id="new-game" class="btn btn-primary btn-lg mt-4" role="button">New Game</a>
+                    <a id="solver" class="btn btn-primary btn-lg mt-4" role="button">Solver</a>
+                    <a id="undo" class="btn btn-danger btn-lg mt-4" role="button">Undo</a>
+
+                </div>
+            </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <script src="./solver/solver.js"></script>
+    <script src="./games/easygames.js"></script>
+</body>
