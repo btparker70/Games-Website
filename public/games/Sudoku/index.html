@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sudoku!</title>
+    <script src="https://kit.fontawesome.com/59ad34aafc.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/flatly/bootstrap.min.css" />
+    <link href="style.css" rel="stylesheet" />
+</head>
+<style>
+    .container {
+    /* min-height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #eee;
+}
+.game-board {
+    width: 75vw;
+    min-height: 75vh;
+    margin-bottom: 2vh;
+    /* grid-template-columns: auto auto auto; */
+}
+.block {
+    display: flex;
+    height: auto;
+    width: 8vw;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 3rem;
+    background-color: rgb(250, 92, 0) ;
+}
+
+.block-anchored {
+    font-weight: bolder;
+}
+
+.clicker-block {
+    display: flex;
+    height: 66px;
+    width: 66px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 53px;
+    background-color: green;
+    border: 2px solid black;
+    border-radius: 25px;
+    margin-left: .3rem;
+    /* background-color: rgb(131, 207, 131); */
+}
+/* OUTER BORDER */
+#block_A1, #block_B1, #block_C1, #block_D1, #block_E1, #block_F1, #block_G1, #block_H1, #block_I1 {
+    border-top: 5px solid black;
+}
+#block_I1, #block_I2, #block_I3, #block_I4, #block_I5, #block_I6, #block_I7, #block_I8, #block_I9 {
+    border-right: 5px solid black;
+}
+#block_A9, #block_B9, #block_C9, #block_D9, #block_E9, #block_F9, #block_G9, #block_H9, #block_I9 {
+    border-bottom: 5px solid black;
+}
+#block_A1, #block_A2, #block_A3, #block_A4, #block_A5, #block_A6, #block_A7, #block_A8, #block_A9 {
+    border-left: 5px solid black;
+}
+/* INNER BORDERS */
+#block_A1, #block_B1, #block_C1, #block_D1, #block_E1, #block_F1, #block_G1, #block_H1, #block_I1 {
+    border-bottom: 5px solid black;
+}
+#block_A2, #block_B2, #block_C2, #block_D2, #block_E2, #block_F2, #block_G2, #block_H2, #block_I2 {
+    border-bottom: 5px solid black;
+}
+#block_A3, #block_B3, #block_C3, #block_D3, #block_E3, #block_F3, #block_G3, #block_H3, #block_I3 {
+    border-bottom: 10px solid black;
+}
+#block_A4, #block_B4, #block_C4, #block_D4, #block_E4, #block_F4, #block_G4, #block_H4, #block_I4 {
+    border-bottom: 5px solid black;
+}
+#block_A5, #block_B5, #block_C5, #block_D5, #block_E5, #block_F5, #block_G5, #block_H5, #block_I5 {
+    border-bottom: 5px solid black;
+}
+#block_A6, #block_B6, #block_C6, #block_D6, #block_E6, #block_F6, #block_G6, #block_H6, #block_I6 {
+    border-bottom: 10px solid black;
+}
+#block_A7, #block_B7, #block_C7, #block_D7, #block_E7, #block_F7, #block_G7, #block_H7, #block_I7 {
+    border-bottom: 5px solid black;
+}
+#block_A8, #block_B8, #block_C8, #block_D8, #block_E8, #block_F8, #block_G8, #block_H8, #block_I8 {
+    border-bottom: 5px solid black;
+}
+/* Inner Columns */
+#block_B1, #block_B2, #block_B3, #block_B4, #block_B5, #block_B6, #block_B7, #block_B8, #block_B9 {
+    border-left: 5px solid black;
+}
+#block_C1, #block_C2, #block_C3, #block_C4, #block_C5, #block_C6, #block_C7, #block_C8, #block_C9 {
+    border-left: 5px solid black;
+}
+#block_D1, #block_D2, #block_D3, #block_D4, #block_D5, #block_D6, #block_D7, #block_D8, #block_D9 {
+    border-left: 10px solid black;
+}
+#block_E1, #block_E2, #block_E3, #block_E4, #block_E5, #block_E6, #block_E7, #block_E8, #block_E9 {
+    border-left: 5px solid black;
+}
+#block_F1, #block_F2, #block_F3, #block_F4, #block_F5, #block_F6, #block_F7, #block_F8, #block_F9 {
+    border-left: 5px solid black;
+}
+#block_G1, #block_G2, #block_G3, #block_G4, #block_G5, #block_G6, #block_G7, #block_G8, #block_G9 {
+    border-left: 10px solid black;
+}
+#block_H1, #block_H2, #block_H3, #block_H4, #block_H5, #block_H6, #block_H7, #block_H8, #block_H9 {
+    border-left: 5px solid black;
+}
+#block_I1, #block_I2, #block_I3, #block_I4, #block_I5, #block_I6, #block_I7, #block_I8, #block_I9 {
+    border-left: 5px solid black;
+}
+</style>
+
+<body>
+    <div class="container">
+            <div class="container game-board" style="background-color: rgb(255, 255, 255);">
+                <div id="row-1" class="row">
+                    <div id="block_A1" class="col block" tabindex="1"></div>
+                    <div id="block_B1" class="col block" tabindex="1"></div>
+                    <div id="block_C1" class="col block" tabindex="1"></div>
+                    <div id="block_D1" class="col block" tabindex="1"></div>
+                    <div id="block_E1" class="col block" tabindex="1"></div>
+                    <div id="block_F1" class="col block" tabindex="1"></div>
+                    <div id="block_G1" class="col block" tabindex="1"></div>
+                    <div id="block_H1" class="col block" tabindex="1"></div>
+                    <div id="block_I1" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-2" class="row">
+                    <div id="block_A2" class="col block" tabindex="1"></div>
+                    <div id="block_B2" class="col block" tabindex="1"></div>
+                    <div id="block_C2" class="col block" tabindex="1"></div>
+                    <div id="block_D2" class="col block" tabindex="1"></div>
+                    <div id="block_E2" class="col block" tabindex="1"></div>
+                    <div id="block_F2" class="col block" tabindex="1"></div>
+                    <div id="block_G2" class="col block" tabindex="1"></div>
+                    <div id="block_H2" class="col block" tabindex="1"></div>
+                    <div id="block_I2" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-3" class="row">
+                    <div id="block_A3" class="col block" tabindex="1"></div>
+                    <div id="block_B3" class="col block" tabindex="1"></div>
+                    <div id="block_C3" class="col block" tabindex="1"></div>
+                    <div id="block_D3" class="col block" tabindex="1"></div>
+                    <div id="block_E3" class="col block" tabindex="1"></div>
+                    <div id="block_F3" class="col block" tabindex="1"></div>
+                    <div id="block_G3" class="col block" tabindex="1"></div>
+                    <div id="block_H3" class="col block" tabindex="1"></div>
+                    <div id="block_I3" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-4" class="row">
+                    <div id="block_A4" class="col block" tabindex="1"></div>
+                    <div id="block_B4" class="col block" tabindex="1"></div>
+                    <div id="block_C4" class="col block" tabindex="1"></div>
+                    <div id="block_D4" class="col block" tabindex="1"></div>
+                    <div id="block_E4" class="col block" tabindex="1"></div>
+                    <div id="block_F4" class="col block" tabindex="1"></div>
+                    <div id="block_G4" class="col block" tabindex="1"></div>
+                    <div id="block_H4" class="col block" tabindex="1"></div>
+                    <div id="block_I4" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-5" class="row">
+                    <div id="block_A5" class="col block" tabindex="1"></div>
+                    <div id="block_B5" class="col block" tabindex="1"></div>
+                    <div id="block_C5" class="col block" tabindex="1"></div>
+                    <div id="block_D5" class="col block" tabindex="1"></div>
+                    <div id="block_E5" class="col block" tabindex="1"></div>
+                    <div id="block_F5" class="col block" tabindex="1"></div>
+                    <div id="block_G5" class="col block" tabindex="1"></div>
+                    <div id="block_H5" class="col block" tabindex="1"></div>
+                    <div id="block_I5" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-6" class="row">
+                    <div id="block_A6" class="col block" tabindex="1"></div>
+                    <div id="block_B6" class="col block" tabindex="1"></div>
+                    <div id="block_C6" class="col block" tabindex="1"></div>
+                    <div id="block_D6" class="col block" tabindex="1"></div>
+                    <div id="block_E6" class="col block" tabindex="1"></div>
+                    <div id="block_F6" class="col block" tabindex="1"></div>
+                    <div id="block_G6" class="col block" tabindex="1"></div>
+                    <div id="block_H6" class="col block" tabindex="1"></div>
+                    <div id="block_I6" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-7" class="row">
+                    <div id="block_A7" class="col block" tabindex="1"></div>
+                    <div id="block_B7" class="col block" tabindex="1"></div>
+                    <div id="block_C7" class="col block" tabindex="1"></div>
+                    <div id="block_D7" class="col block" tabindex="1"></div>
+                    <div id="block_E7" class="col block" tabindex="1"></div>
+                    <div id="block_F7" class="col block" tabindex="1"></div>
+                    <div id="block_G7" class="col block" tabindex="1"></div>
+                    <div id="block_H7" class="col block" tabindex="1"></div>
+                    <div id="block_I7" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-8" class="row">
+                    <div id="block_A8" class="col block" tabindex="1"></div>
+                    <div id="block_B8" class="col block" tabindex="1"></div>
+                    <div id="block_C8" class="col block" tabindex="1"></div>
+                    <div id="block_D8" class="col block" tabindex="1"></div>
+                    <div id="block_E8" class="col block" tabindex="1"></div>
+                    <div id="block_F8" class="col block" tabindex="1"></div>
+                    <div id="block_G8" class="col block" tabindex="1"></div>
+                    <div id="block_H8" class="col block" tabindex="1"></div>
+                    <div id="block_I8" class="col block" tabindex="1"></div>
+                </div>
+                <div id="row-9" class="row">
+                    <div id="block_A9" class="col block" tabindex="1"></div>
+                    <div id="block_B9" class="col block" tabindex="1"></div>
+                    <div id="block_C9" class="col block" tabindex="1"></div>
+                    <div id="block_D9" class="col block" tabindex="1"></div>
+                    <div id="block_E9" class="col block" tabindex="1"></div>
+                    <div id="block_F9" class="col block" tabindex="1"></div>
+                    <div id="block_G9" class="col block" tabindex="1"></div>
+                    <div id="block_H9" class="col block" tabindex="1"></div>
+                    <div id="block_I9" class="col block" tabindex="1"></div>
+                </div>
+            </div>
+            <div id="row-nums" class="row">
+                <button type="button" id="click-1" class="btn btn-success clicker-block">1</button>
+                <button type="button" id="click-2" class="btn btn-success clicker-block">2</button>
+                <button type="button" id="click-3" class="btn btn-success clicker-block">3</button>
+                <button type="button" id="click-4" class="btn btn-success clicker-block">4</button>
+                <button type="button" id="click-5" class="btn btn-success clicker-block">5</button>
+                <button type="button" id="click-6" class="btn btn-success clicker-block">6</button>
+                <button type="button" id="click-7" class="btn btn-success clicker-block">7</button>
+                <button type="button" id="click-8" class="btn btn-success clicker-block">8</button>
+                <button type="button" id="click-9" class="btn btn-success clicker-block">9</button>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <a id="new-game" class="btn btn-primary btn-lg mt-4" role="button">New Game</a>
+                    <a id="solver" class="btn btn-primary btn-lg mt-4" role="button">Solver</a>
+                    <a id="undo" class="btn btn-danger btn-lg mt-4" role="button">Undo</a>
+
+                </div>
+            </div>
+
+    </div>
+
+
+</body>
+
+<script>var rowSingle = [
+    [null, 2, 3, 4, 5, 6, 7, 8, 9],
+    [1, null, 3, 4, 5, 6, 7, 8, 9],
+    [1, 2, null, 4, 5, 6, 7, 8, 9],
+    [1, 2, 3, null, 5, 6, 7, 8, 9],
+    [1, 2, 3, 4, null, 6, 7, 8, 9],
+    [1, 2, 3, 4, 5, null, 7, 8, 9],
+    [1, 2, 3, 4, 5, 6, null, 8, 9],
+    [1, 2, 3, 4, 5, 6, 7, null, 9],
+    [1, 2, 3, 4, 5, 6, 7, 8, null],
+];
+
+var colSingle = [
+    [null, 1, 1, 1, 1, 1, 1, 1, 1],
+    [2, null, 2, 2, 2, 2, 2, 2, 2],
+    [3, 3, null, 3, 3, 3, 3, 3, 3],
+    [4, 4, 4, null, 4, 4, 4, 4, 4],
+    [5, 5, 5, 5, null, 5, 5, 5, 5],
+    [6, 6, 6, 6, 6, null, 6, 6, 6],
+    [7, 7, 7, 7, 7, 7, null, 7, 7],
+    [8, 8, 8, 8, 8, 8, 8, null, 8],
+    [9, 9, 9, 9, 9, 9, 9, 9, null],
+]
+var easyGame4Solved = [
+    [3, 7, 4, 1, 6, 8, 2, 5, 9],
+    [5, 1, 9, 4, 2, 7, 6, 8, 3],
+    [2, 8, 6, 3, 9, 5, 7, 1, 4],
+    [6, 9, 8, 5, 4, 1, 3, 7, 2],
+    [1, 2, 3, 7, 8, 6, 9, 4, 5],
+    [4, 5, 7, 9, 3, 2, 1, 6, 8],
+    [9, 6, 2, 8, 7, 4, 5, 3, 1],
+    [8, 3, 5, 6, 1, 9, 4, 2, 7],
+    [7, 4, 1, 2, 5, 3, 8, 9, null],
+];
+
+var easyIMPORTED =     [
+        [1, 2, 6, null, null, 7, null, null, null],
+        [null, null, 3, null, 8, null, null, null, 5],
+        [5, null, 8, null, 9, null, null, 3, null],
+        [6, null, 4, 8, 7, null, 5, null, 2],
+        [null, null, 5, null, null, null, 8, null, null],
+        [2, null, 9, null, 5, 3, 1, null, 6],
+        [null, 6, null, null, 4, null, 3, null, 1],
+        [3, null, null, null, 2, null, 9, null, null],
+        [null, null, null, 3, null, null, 7, 5, 8],
+    ]
+// window.clearInterval(winAnimationSwitch);
+
+gamePopulator(easyIMPORTED);
+// Populates game board
+function gamePopulator(gameArray) {
+    $(".block").removeClass('anchored block-anchored').css('background-color', 'white');
+    clearInterval(winAnimationSwitch);
+    for (i = 0; i < gameArray.length; i++) {
+        for (j = 0; j < gameArray[i].length; j++) {
+            var letter = String.fromCharCode(65 + j);
+            if (gameArray[i][j] !== null) {
+                $(`#block_${letter}${i + 1}`).text(gameArray[i][j]).addClass('anchored block-anchored');
+            } else {
+                $(`#block_${letter}${i + 1}`).text(gameArray[i][j]);
+            }
+        }
+    }
+}
+
+// New-game button
+$('#new-game').on('click', function () {
+    $('.block').empty();
+    var randomNum = Math.floor(Math.random() * easyGames.length);
+    gamePopulator(easyGames[randomNum]);
+    clearInterval(winAnimationSwitch);
+})
+
+// Solver button
+$('#solver').on('click', function () {
+
+    replaceCols();
+        replaceRows();
+
+})
+
+// Undo button
+$('#undo').on('click', function () {
+
+})
+
+// Select empty block: Change block color when clicked
+$('.block').on('click', function () {
+    $('.block').css('background-color', 'white').removeClass('selected');
+    $(this).css('background-color', 'rgb(64, 187, 64)').addClass('selected');
+
+})
+
+// Select empty block: Change row/col color when clicked
+$('.block').on('click', function () {
+    // If the block is empty
+    if ($(this).text() === '') {
+        // Letter
+        var row = $(this).attr('id').charAt(6);
+        // Number
+        var col = $(this).attr('id').charAt(7);
+        $('.block').css('background-color', 'white');
+
+        // Colors the row and column selected
+        for (i = 1; i < 10; i++) {
+            $(`#block_${row}${i}`).css('background-color', 'rgb(131, 207, 131)');
+        }
+        for (j = 0; j < 9; j++) {
+            var letter = String.fromCharCode(65 + j);
+            $(`#block_${letter}${col}`).css('background-color', 'rgb(131, 207, 131)');
+        }
+
+        // Colors the selected square
+        $(this).css('background-color', 'rgb(64, 187, 64)');
+    } else
+    // Color all same blocks with number
+    {
+        $('.block').css('background-color', 'white');
+        var num = $(this).text();
+        $(`.block:contains('${num}')`).css('background-color', 'rgb(64, 187, 64)');
+    }
+})
+
+// Enter number on board from button
+$('.clicker-block').on('click', function () {
+    if ($(".block[class*='selected']").hasClass('anchored') === false) {
+        const getNum = $(this).text();
+        $(".block[class*='selected']").text(getNum);
+    }
+    boardFullChecker();
+})
+
+// var winAnimationSwitch;
+// var winAnimationSwitch = clearInterval(winAnimation);
+
+// Win animation
+// function winAnimation() {
+
+//     $('.block').css('background-color', 'white');
+//     var i = 1;
+//     var j = 0;
+//     setInterval(function(){ 
+//         var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'rgb(250, 92, 0)', 'rgb(0, 245, 245)', 'rgb(204, 23, 114)']
+//             $(`.block:contains('${(i%9) + 1}')`).css('background-color', `${colors[j%8]}`);
+//         i++;
+//         j++;
+//     }, 100);
+// }
+
+
+// var winInc1 = 1;
+// var winInc2 = 0;
+// var winAnimationSwitch;
+// var winAnimation = function() {
+//     var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'rgb(250, 92, 0)', 'rgb(0, 245, 245)', 'rgb(204, 23, 114)']
+//     $(`.block:contains('${(winInc1%9) + 1}')`).css('background-color', `${colors[winInc2%8]}`);
+//     winInc1++;
+//     winInc2++;
+// }
+
+var winInc1 = 1;
+var winInc2 = 0;
+var winAnimationSwitch;
+function winAnimation() {
+    var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'rgb(250, 92, 0)', 'rgb(0, 245, 245)', 'rgb(204, 23, 114)']
+    $(`.block:contains('${(winInc1%9) + 1}')`).css('background-color', `${colors[winInc2%8]}`);
+    winInc1++;
+    winInc2++;
+}
+// var winAnimationSwitch = setInterval(winAnimation, 100)
+
+
+function boardFullChecker() {
+    var counter = 0;
+
+    $('.block').each(function() {
+        if ($(this).text().length) {
+            counter++;
+        }
+        if(counter == 81) {
+            var winAnimationSwitch = setInterval(winAnimation, 100)
+
+        }
+    })
+    var counter = 0;
+
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="script.js"></script>
+<script src="./solver/solver.js"></script>
+<script src="./games/easygames.js"></script>
