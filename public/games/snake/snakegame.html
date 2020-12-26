@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sudoku!</title>
+    <script src="https://kit.fontawesome.com/59ad34aafc.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/flatly/bootstrap.min.css" />
+    <!-- <link href="style.css" rel="stylesheet" /> -->
+</head>
+
+<body>
+
+    <canvas id="snakeboard" width="400" height="400"></canvas>
+    <style>
+        #snakeboard {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+    </style>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+    const board_border = 'black';
+    const board_background = 'white';
+    const snake_col = 'lightblue';
+    const snake_border = 'darkblue';
+
+    // Make the snake
+    let snake = [
+        { x: 200, y: 200 },
+        { x: 190, y: 200 },
+        { x: 180, y: 200 },
+        { x: 170, y: 200 },
+        { x: 160, y: 200 }
+    ];
+
+    // Get canvas element
+    const snakeboard = document.getElementById('snakeboard');
+    // Return two dimensional drawing context
+    const snakeboard_ctx = snakeboard.getContext('2d');
+
+    // Start game
+    main();
+
+    // Make function called repeatedly to keep game running
+    function main() {
+        clearCanvas();
+        drawSnake();
+    }
+
+    // Draw a border around the canvas
+    function clearCanvas() {
+        // Select the color to fill the drawing
+        snakeboard_ctx.fillStyle = board_background;
+        // Select the color for the border of the canvas
+        snakeboard_ctx.strokeStyle = board_border;
+        // Draw a filled rectangle to conver the entire canvas
+        snakeboard_ctx.fillRect(0, 0, snakeboard.width, snakeboard.height);
+        // Draw a border around the entire canvas
+        snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.height);
+    }
+    // Draw the snake on the canvas
+    function drawSnake() {
+        snake.forEach(drawSnakePart);
+    }
+
+    // Display the snake on the board
+    function drawSnakePart(snakePart) {
+        // Set color of snake part
+        snakeboard_ctx.fillStyle = 'lightblue';
+        // Set color of snake part border
+        snakeboard_ctx.strokeStyle = 'darkblue';
+        // Draw a filled rectangle to represent the snake part at the coordinates
+        snakeboard_ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+        // Draw boarder around the snake part
+        snakeboard_ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+    }
+    console.log(123)
+
+</script>
+
+</html>
